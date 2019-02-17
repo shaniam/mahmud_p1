@@ -175,72 +175,38 @@ int main(int argc, char* argv[]){
 				}
 			}
 		}
-	for (auto x: path){
-		cerr << x.first->state << endl;
-	}
-
-	#if 0
-	string arg=argv[2];
-	vector<pair<Node*, string>> path={};
-	path.push_back(make_pair(starter, arg));
-	bool flag=false;
-	string left;
-	int symbol;
-	char sym;
-	Node* curr=starter;
-	for (int i=0; i<path.size(); i++){
-		Node* curr=path[i].first;
-		left=path[i].second;
-		sym=left[0];
-		symbol=sym-'0';
-		cerr << symbol << endl;
-		left=left.substr(1);
-		if (symbol==0){
-			for (auto x: curr->zeros){
-				path.push_back(make_pair(x, left));
-			}
-		}
-		else{
-			for (auto x: curr->ones){
-				path.push_back(make_pair(x, left));
-			}
-		}
-	}
 	bool acc=false;
-	vector<Node*> accepts={};
-	vector<Node*> rejects={};
-	for (int i=0; i<path.size(); i++){
-				cerr << path[i].first->state << endl;
-			
-	}
-	if (acc=true){
-		cerr << "accept ";
-		for (auto x: accepts){
-			cerr << x->state << " " ;
+	vector<Node*>accepts={};
+	vector<Node*>rejects={};
+	for (auto x: path){
+		//cerr << x.first->state << endl;
+		if (x.second.length()==0){
+			if(x.first->accept==true){
+			acc=true;
+			accepts.push_back(x.first);
 			}
+			else{
+			rejects.push_back(x.first);
+			}
+			cerr << x.first->state << endl;
+		}
+
+	}
+/*	if(acc=true){
+		cerr << "accept";
+		for (auto x : accepts){
+			cerr << " ";
+			cerr << x->state ;
+		}
 		cerr << endl;
 	}
 	else{
-		cerr << "reject ";
-		for (auto x :rejects){
-			cerr << x->state << " "; 
+		cerr << "reject";
+		for (auto x : rejects){
+			cerr << " ";
+			cerr << x->state << endl;
 		}
 		cerr << endl;
-	}
-	/*for (auto x : lis){
-			cerr << x->state;
-			if (x->start){
-			cerr << "TRUE" ;
-			}
-			else{
-			cerr << "FALSE" ;
-			}
-			if (x->accept){
-			cerr << "TRUE" << endl;
-			}
-			else{
-			cerr << "FALSE" << endl;
-			}
-		}*/
-	#endif
+	}*/
+
 }
