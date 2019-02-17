@@ -125,29 +125,31 @@ int main(int argc, char* argv[]){
 	}
 	string arg=argv[2];
 	vector<pair<Node*, string>> path;
-	paths.push_back(start, arg);
+	path.push_back(make_pair(starter, arg));
 	bool flag=false;
-	str left;
+	string left;
 	int symbol;
+	char sym;
 	Node* curr=starter;
 	for (int i=0; i<path.size(); i++){
-		Node* curr=paths[i]->state;
-		left=paths[i].second;
-		if(left.size==""){
+		Node* curr=path[i].first;
+		left=path[i].second;
+		if(left==""){
 			if(curr->accept==true){
 			flag=true;
 			}
 		}
 		else{
-			symbol=atoi(left[0]);
+			sym=left[0];
+			symbol=sym-'0';
 			if (symbol==0){
 				for (auto x: curr->zeros){
-					paths.push_back(x, left(1,left.length()));
+					path.push_back(make_pair(x, left.substr(1,left.length())));
 				}
 			}
 			else{
 				for (auto x: curr->ones){
-					paths.push_back(x, left(1, left.length()));
+					path.push_back(make_pair(x, left.substr(1, left.length())));
 				}
 			}
 		}
