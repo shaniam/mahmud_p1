@@ -133,6 +133,17 @@ int main(int argc, char* argv[]){
 		}
 
 	}
+	for (auto x: lis){
+		cerr << x->state << ": zeros: ";
+		for (auto y: x->zeros){
+			cerr << y->state << " ";
+		}
+		cerr << "\n " << x->state << ": ones";
+		for (auto y :x->ones){
+			cerr << y->state << " ";
+		}
+		cerr << endl;
+	}
 	string arg=argv[2];
 	vector<pair<Node*, string>> path={};
 	path.push_back(make_pair(starter, arg));
@@ -144,20 +155,56 @@ int main(int argc, char* argv[]){
 	for (int i=0; i<path.size(); i++){
 		Node* curr=path[i].first;
 		left=path[i].second;
-			sym=left[0];
-			symbol=sym-'0';
-			cerr << symbol << endl;
-			left=left.substr(1);
-			if (symbol==0){
-				for (auto x: curr->zeros){
-					path.push_back(make_pair(x, left));
-				}
+		if(left==""){
+			if(curr->accept==true){
+				flag=true;
 			}
+		}
 			else{
-				for (auto x: curr->ones){
-					path.push_back(make_pair(x, left));
+				sym=left[0];
+				symbol=sym-'0';
+				if (symbol==0){
+					for (auto x: curr->zeros){
+						path.push_back(make_pair(x, left.substr(1,left.length())));
+					}
+				}
+				else{
+					for (auto x: curr->ones){
+						path.push_back(make_pair(x, left.substr(1, left.length())));
+					}
 				}
 			}
+		}
+	for (auto x: path){
+		cerr << x.first->state << endl;
+	}
+
+	#if 0
+	string arg=argv[2];
+	vector<pair<Node*, string>> path={};
+	path.push_back(make_pair(starter, arg));
+	bool flag=false;
+	string left;
+	int symbol;
+	char sym;
+	Node* curr=starter;
+	for (int i=0; i<path.size(); i++){
+		Node* curr=path[i].first;
+		left=path[i].second;
+		sym=left[0];
+		symbol=sym-'0';
+		cerr << symbol << endl;
+		left=left.substr(1);
+		if (symbol==0){
+			for (auto x: curr->zeros){
+				path.push_back(make_pair(x, left));
+			}
+		}
+		else{
+			for (auto x: curr->ones){
+				path.push_back(make_pair(x, left));
+			}
+		}
 	}
 	bool acc=false;
 	vector<Node*> accepts={};
@@ -195,5 +242,5 @@ int main(int argc, char* argv[]){
 			cerr << "FALSE" << endl;
 			}
 		}*/
-
+	#endif
 }
