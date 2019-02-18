@@ -3,15 +3,11 @@
 #include <sstream>
 #include <fstream>
 Node* find(vector<Node*> &lis, int x){
-	//int i=0;
-	//cerr << x << endl;
 	for (auto &b : lis){
 		if(b->state==x){
 			return b;
 		}
-	//	i++;
 	}
-	//cerr << "we out " << x << endl;
 	return NULL;
 }
 int main(int argc, char* argv[]){
@@ -98,7 +94,6 @@ int main(int argc, char* argv[]){
 				}
 			}
 			else if(begin==NULL && end==NULL){
-				//cerr << "HELLO" << endl;
 				if (state1!=state2){
 				begin=new Node(state1, false, false);
 				end=new Node(state2, false, false);
@@ -182,30 +177,37 @@ int main(int argc, char* argv[]){
 		//cerr << x.first->state << endl;
 		if (x.second.length()==0){
 			if(x.first->accept==true){
-			acc=true;
-			accepts.push_back(x.first);
+			//acc=true;
+			if(find(accepts, x.first->state)==NULL){
+				accepts.push_back(x.first);
+			}
 			}
 			else{
-			rejects.push_back(x.first);
+			if(find(rejects, x.first->state)==NULL){
+				rejects.push_back(x.first);
+				}
 			}
-			cerr << x.first->state << endl;
+			//cerr << x.first->state << endl;
 		}
 
 	}
-/*	if(acc=true){
+	if (accepts.size()>0){
 		cerr << "accept";
-		for (auto x : accepts){
+		for (auto x: accepts){
 			cerr << " ";
-			cerr << x->state ;
+			cerr << x->state;	
 		}
-		cerr << endl;
+		cerr << "\n";
 	}
 	else{
 		cerr << "reject";
-		for (auto x : rejects){
+		for (auto y: rejects){
 			cerr << " ";
-			cerr << x->state << endl;
+			cerr << y->state;
 		}
+		cerr << "\n";
+	}
+/*	if(acc=true){
 		cerr << endl;
 	}*/
 
