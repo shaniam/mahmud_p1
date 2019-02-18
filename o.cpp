@@ -128,9 +128,21 @@ int main(int argc, char* argv[]){
 		}
 
 	}
+	for (auto x: lis){
+		cerr << x->state << ": zeros: ";
+		for (auto y: x->zeros){
+			cerr << y->state << " ";
+		}
+		cerr << "\n " << x->state << ": ones";
+		for (auto y :x->ones){
+			cerr << y->state << " ";
+		}
+		cerr << endl;
+	}
 	string arg=argv[2];
 	vector<pair<Node*, string>> path={};
 	path.push_back(make_pair(starter, arg));
+	bool flag=false;
 	string left;
 	int symbol;
 	char sym;
@@ -138,7 +150,12 @@ int main(int argc, char* argv[]){
 	for (int i=0; i<path.size(); i++){
 		Node* curr=path[i].first;
 		left=path[i].second;
-		if (left.size()!=0){
+		if(left==""){
+			if(curr->accept==true){
+				flag=true;
+			}
+		}
+			else{
 				sym=left[0];
 				symbol=sym-'0';
 				if (symbol==0){

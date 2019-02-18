@@ -131,6 +131,7 @@ int main(int argc, char* argv[]){
 	string arg=argv[2];
 	vector<pair<Node*, string>> path={};
 	path.push_back(make_pair(starter, arg));
+	bool flag=false;
 	string left;
 	int symbol;
 	char sym;
@@ -138,7 +139,6 @@ int main(int argc, char* argv[]){
 	for (int i=0; i<path.size(); i++){
 		Node* curr=path[i].first;
 		left=path[i].second;
-		if (left.size()!=0){
 				sym=left[0];
 				symbol=sym-'0';
 				if (symbol==0){
@@ -151,7 +151,6 @@ int main(int argc, char* argv[]){
 						path.push_back(make_pair(x, left.substr(1, left.length())));
 					}
 				}
-			}
 		}
 	bool acc=false;
 	vector<Node*>accepts={};

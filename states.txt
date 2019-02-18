@@ -1,4 +1,0 @@
-state	1	startaccept
-state	7	accept
-state	8	start accept
-state	2	start
